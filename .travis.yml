@@ -23,6 +23,7 @@ jobs:
         - python -m pip install -U 'setuptools>=34.4.0' virtualenv==16.7.9
     - arch: arm64
       env: TOXENV=py35 PYTEST_COVERAGE=1 PYTEST_ADDOPTS="-k test_raises_cyclic_reference"
+      sudo: required
       before_install:
         # Work around https://github.com/jaraco/zipp/issues/40.
         - python -m pip install -U 'setuptools>=34.4.0' virtualenv==16.7.9
@@ -42,7 +43,7 @@ before_script:
       export _PYTEST_TOX_EXTRA_DEP=coverage-enable-subprocess
     fi
 
-script: sudo tox
+script: tox
 
 after_success:
   - |
